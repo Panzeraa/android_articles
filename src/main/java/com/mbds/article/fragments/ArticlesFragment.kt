@@ -13,6 +13,7 @@ import com.mbds.article.R
 import com.mbds.article.adapters.ArticleAdapter
 
 import com.mbds.article.model.Article
+import com.mbds.article.model.ArticleInfo
 import com.mbds.article.repositories.Articlepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,10 +58,17 @@ class ArticlesFragment : Fragment() {
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
             val result = repository.list()
-            bindData(result)
+            if (result != null) {
+                bindData(result.articles)
+            }
         }
     }
     //S'execute sur le thread principal
+//    private suspend fun bindData(result: List<Article>) {
+//        withContext(Dispatchers.Main) {
+////afficher les données dans le recycler
+//        }
+//    }
     private suspend fun bindData(result: List<Article>) {
         withContext(Dispatchers.Main) {
 //afficher les données dans le recycler
