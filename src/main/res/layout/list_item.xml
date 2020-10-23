@@ -3,24 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="200dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/category_image"
+        android:layout_width="130dp"
+        android:layout_height="123dp"
         android:maxHeight="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/source"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/category_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/category_image"
+        android:layout_marginStart="20dp"
+        tools:text="Source" />
 
     <TextView
         android:id="@+id/category_name"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/category_image"
-        tools:text="Politique" />
+        app:layout_constraintStart_toStartOf="@+id/source"
+        app:layout_constraintTop_toBottomOf="@+id/source"
+        tools:ignore="MissingConstraints"
+        tools:text="Categorie" />
+
+    <TextView
+        android:id="@+id/published_at"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/category_name"
+        app:layout_constraintTop_toBottomOf="@id/category_name"
+        app:layout_constraintVertical_bias="0.888"
+        tools:text="Date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

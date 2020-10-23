@@ -11,13 +11,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mbds.article.R
 import com.mbds.article.model.Article
+import java.time.LocalDate
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class ArticleAdapter(private val dataset: List<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     class ViewHolder(val root: View) : RecyclerView.ViewHolder(root) {
         fun bind(item: Article) {
-            val txtName: TextView = root.findViewById<TextView>(R.id.category_name)
+
+            //nameSource
+            val txtSource: TextView = root.findViewById(R.id.source)
+            val source = item.source.toString()
+            val sourceName = source.substring(source.indexOf("name=") + 5 ,source.length - 1)
+            //titre
+            val txtName: TextView = root.findViewById(R.id.category_name)
+            //date
+            val date = item.publishedAt.toString()
+
+            val txtPublishedAt: TextView = root.findViewById(R.id.published_at)
+
+            txtSource.text = sourceName
             txtName.text = item.title
+            txtPublishedAt.text = date
+
 
             val imageView = root.findViewById<ImageView>(R.id.category_image)
 

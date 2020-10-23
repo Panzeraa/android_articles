@@ -44,7 +44,6 @@ class ArticlesFragment : Fragment() {
         myView = view
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val articles = mutableListOf<Article>()
-        //articles.add("","","","","","","","")
         val adapterRecycler = ArticleAdapter(articles)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapterRecycler
@@ -68,21 +67,15 @@ class ArticlesFragment : Fragment() {
             }
         }
     }
-    //S'execute sur le thread principal
-//    private suspend fun bindData(result: List<Article>) {
-//        withContext(Dispatchers.Main) {
-////afficher les données dans le recycler
-//        }
-//    }
+
     private suspend fun bindData(result: List<Article>) {
         withContext(Dispatchers.Main) {
+            //afficher les données dans le recycler
             val recyclerView: RecyclerView = myView.findViewById(R.id.recycler_view)
-        val adapterRecycler = ArticleAdapter(result)
+            val adapterRecycler = ArticleAdapter(result)
             recyclerView.adapter = adapterRecycler
-//afficher les données dans le recycler
         }
     }
-
 }
 
 private fun Lifecycle.launch(function: () -> Unit) {
