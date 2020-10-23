@@ -20,9 +20,11 @@ class Articlepository {
         service = retrofit.create(ArticleService::class.java)
     }
 
-    fun list(): ArticleInfo? {
+    fun list(): List<Article>? {
         val response = service.list().execute()
-        return response.body()
+//        println(response.body()?.articles)
+        return response.body()?.articles
+
     }
 
 }

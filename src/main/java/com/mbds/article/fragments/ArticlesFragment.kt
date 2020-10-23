@@ -58,8 +58,9 @@ class ArticlesFragment : Fragment() {
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
             val result = repository.list()
+            println(result)
             if (result != null) {
-                bindData(result.articles)
+                bindData(result)
             }
         }
     }
