@@ -28,6 +28,8 @@ import kotlinx.coroutines.withContext
 class ArticlesFragment : Fragment() {
     private val repository = Articlepository()
 
+    private lateinit var myView: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +40,8 @@ class ArticlesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        myView = view
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val articles = mutableListOf<Article>()
         //articles.add("","","","","","","","")
@@ -72,6 +76,9 @@ class ArticlesFragment : Fragment() {
 //    }
     private suspend fun bindData(result: List<Article>) {
         withContext(Dispatchers.Main) {
+            val recyclerView: RecyclerView = myView.findViewById(R.id.recycler_view)
+        val adapterRecycler = ArticleAdapter(result)
+            recyclerView.adapter = adapterRecycler
 //afficher les données dans le recycler
         }
     }
