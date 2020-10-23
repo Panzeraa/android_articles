@@ -8,7 +8,7 @@ class Articlepository {
     private val service: ArticleService
     init {
         val retrofit = Retrofit.Builder().apply {
-            baseUrl("[URL]")
+            baseUrl("https://newsapi.org/v2/everything?q=bitcoin&apiKey=79e9f5affe334dadbf8b3e91d382bcb7")
         }.build()
         service = retrofit.create(ArticleService::class.java)
     }

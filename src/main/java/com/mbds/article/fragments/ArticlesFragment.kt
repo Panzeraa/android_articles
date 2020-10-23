@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mbds.article.R
@@ -14,6 +15,7 @@ import com.mbds.article.adapters.ArticleAdapter
 import com.mbds.article.model.Article
 import com.mbds.article.repositories.Articlepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
@@ -36,12 +38,8 @@ class ArticlesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        val articles = listOf<Article>(
-            Article(name="Politique", image="https://picsum.photos/200/300"),
-            Article(name="Economique", image="https://picsum.photos/200/300"),
-            Article(name="test1", image="https://picsum.photos/200/300"),
-            Article(name="test2", image="https://picsum.photos/200/300")
-        )
+        val articles = mutableListOf<Article>()
+        //articles.add("","","","","","","","")
         val adapterRecycler = ArticleAdapter(articles)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapterRecycler
@@ -51,7 +49,7 @@ class ArticlesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        lifecycle.launch {
+        lifecycleScope.launch {
             getData()
         }
     }

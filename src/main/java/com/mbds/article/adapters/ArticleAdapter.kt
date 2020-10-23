@@ -16,13 +16,13 @@ class ArticleAdapter(private val dataset: List<Article>) :
     class ViewHolder(val root: View) : RecyclerView.ViewHolder(root) {
         fun bind(item: Article) {
             val txtName: TextView = root.findViewById<TextView>(R.id.category_name)
-            txtName.text = item.name
+            txtName.text = item.title
 
             val imageView = root.findViewById<ImageView>(R.id.category_image)
 
             Glide
                 .with(root)
-                .load(item.image)
+                .load(item.urlToImage)
                 .fitCenter()
                 .placeholder(R.drawable.plholder)
                 .into(imageView);
