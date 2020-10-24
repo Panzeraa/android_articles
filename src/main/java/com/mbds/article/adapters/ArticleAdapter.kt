@@ -27,14 +27,15 @@ class ArticleAdapter(private val dataset: List<Article>) :
             //titre
             val txtName: TextView = root.findViewById(R.id.category_name)
             //date
-            val date = item.publishedAt.toString()
+            val date = toDateFormat(item.publishedAt.toString())
+
+            print(item.publishedAt)
 
             val txtPublishedAt: TextView = root.findViewById(R.id.published_at)
 
             txtSource.text = sourceName
             txtName.text = item.title
             txtPublishedAt.text = date
-
 
             val imageView = root.findViewById<ImageView>(R.id.category_image)
 
@@ -45,6 +46,14 @@ class ArticleAdapter(private val dataset: List<Article>) :
                 .placeholder(R.drawable.plholder)
                 .into(imageView);
         }
+
+        private fun toDateFormat(date: String): String{
+            //2020-10-21T13:28:15Z
+            val dateReturn = date.split("[-T:Z]".toRegex())
+            return "Le "+ dateReturn[2] +"-"+ dateReturn[1] +"-" + dateReturn[0] +" à " + dateReturn[3]+"h"+dateReturn[4]
+        }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -59,6 +68,8 @@ class ArticleAdapter(private val dataset: List<Article>) :
 
     //    override fun getItemCount(): Int { return dataset.size}
     override fun getItemCount(): Int =  dataset.size
+
+
 
 
 }

@@ -1,16 +1,25 @@
 package com.mbds.article.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.children
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mbds.article.MainActivity
 import com.mbds.article.R
 import com.mbds.article.adapters.ArticleAdapter
+import com.mbds.article.changeFragment
+import com.mbds.article.databinding.FragmentArticlesBinding
 
 import com.mbds.article.model.Article
 import com.mbds.article.model.ArticleInfo
@@ -30,12 +39,16 @@ class ArticlesFragment : Fragment() {
 
     private lateinit var myView: View
 
+    lateinit var binding: FragmentArticlesBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_articles, container, false)
+        binding = FragmentArticlesBinding.inflate(inflater, container, false)
+        return binding.root
+//        return inflater.inflate(R.layout.fragment_articles, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,10 +74,12 @@ class ArticlesFragment : Fragment() {
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
             val result = repository.list()
-            println(result)
+//            println(result)
+            println(binding.root.children)
             if (result != null) {
                 bindData(result)
             }
+
         }
     }
 
@@ -75,6 +90,22 @@ class ArticlesFragment : Fragment() {
             val adapterRecycler = ArticleAdapter(result)
             recyclerView.adapter = adapterRecycler
         }
+        binding.root.children.filter {
+            it is TextView
+        }.forEach {
+            it.setOnClickListener { view ->
+//                    (activity as? MainActivity)?.changeFragment(
+//                        InformationsFragment.newInstance(
+//                            view.tag?.toString() ?: "ADD"
+//                        )
+//                    )
+                Toast.makeText(context, "Walabok", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    public fun testClick(view: View){
+        Toast.makeText(context, "Walabok", Toast.LENGTH_SHORT).show()
     }
 }
 

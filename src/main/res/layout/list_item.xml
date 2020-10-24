@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     >
 
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/round_image"
         android:layout_width="110dp"
@@ -49,7 +51,7 @@
         app:layout_constraintStart_toStartOf="@+id/source"
         app:layout_constraintTop_toBottomOf="@+id/source"
         tools:ignore="MissingConstraints"
-        tools:text="Categorie" />
+        tools:text="Titre" />
 
     <TextView
         android:id="@+id/published_at"

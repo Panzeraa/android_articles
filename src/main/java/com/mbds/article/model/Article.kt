@@ -1,5 +1,6 @@
 package com.mbds.article.model
 
+import java.time.LocalDateTime
 import java.util.*
 
 data class Article(val source: Object,
@@ -8,7 +9,7 @@ data class Article(val source: Object,
                    val description: String,
                    val url: String,
                    val urlToImage: String,
-                   val publishedAt: Date,
+                   val publishedAt: String,
                    val content: String
                    )
 
