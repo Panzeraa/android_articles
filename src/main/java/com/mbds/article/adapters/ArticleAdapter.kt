@@ -41,7 +41,7 @@ class ArticleAdapter(private val dataset: List<Article>) :
             Glide
                 .with(root)
                 .load(item.urlToImage)
-                .fitCenter()
+                .centerCrop()
                 .placeholder(R.drawable.plholder)
                 .into(imageView);
         }
