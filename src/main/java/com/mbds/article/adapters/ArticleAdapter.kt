@@ -17,9 +17,16 @@ import java.time.format.DateTimeFormatter
 
 class ArticleAdapter(private val dataset: List<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+
+
+
     class ViewHolder(val root: View) : RecyclerView.ViewHolder(root) {
         fun bind(item: Article) {
 
+//            root.setOnClickListener{
+//                println(item.title)
+//
+//            }
             //nameSource
             val txtSource: TextView = root.findViewById(R.id.source)
             val source = item.source.toString()
@@ -45,6 +52,7 @@ class ArticleAdapter(private val dataset: List<Article>) :
                 .centerCrop()
                 .placeholder(R.drawable.plholder)
                 .into(imageView);
+
         }
 
         private fun toDateFormat(date: String): String{
@@ -63,11 +71,15 @@ class ArticleAdapter(private val dataset: List<Article>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.bind(dataset[position])
     }
 
     //    override fun getItemCount(): Int { return dataset.size}
     override fun getItemCount(): Int =  dataset.size
+
+
+
 
 
 

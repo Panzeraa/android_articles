@@ -38,6 +38,7 @@ class ArticlesFragment : Fragment() {
     private val repository = Articlepository()
 
     private lateinit var myView: View
+    private lateinit var categorie: String
 
     lateinit var binding: FragmentArticlesBinding
 
@@ -63,23 +64,22 @@ class ArticlesFragment : Fragment() {
     }
 
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         lifecycleScope.launch {
             getData()
         }
     }
+
     //S'execute dans un thread secondaire
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
-            val result = repository.list()
+            val result = repository.list(categorie)
 //            println(result)
             println(binding.root.children)
             if (result != null) {
                 bindData(result)
             }
-
         }
     }
 
@@ -89,23 +89,18 @@ class ArticlesFragment : Fragment() {
             val recyclerView: RecyclerView = myView.findViewById(R.id.recycler_view)
             val adapterRecycler = ArticleAdapter(result)
             recyclerView.adapter = adapterRecycler
-        }
-        binding.root.children.filter {
-            it is TextView
-        }.forEach {
-            it.setOnClickListener { view ->
-//                    (activity as? MainActivity)?.changeFragment(
-//                        InformationsFragment.newInstance(
-//                            view.tag?.toString() ?: "ADD"
-//                        )
-//                    )
-                Toast.makeText(context, "Walabok", Toast.LENGTH_SHORT).show()
+            for (i in 0..recyclerView.getAdapter()?.getItemCount()!!) {
+                println(recyclerView.getAdapter()!!.getItemId(i))
             }
         }
     }
 
-    public fun testClick(view: View){
-        Toast.makeText(context, "Walabok", Toast.LENGTH_SHORT).show()
+    companion object {
+        fun newInstance(categorie: String): ArticlesFragment {
+            return ArticlesFragment().apply {
+                this.categorie = categorie
+            }
+        }
     }
 }
 

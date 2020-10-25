@@ -12,7 +12,7 @@ class Articlepository {
     private val service: ArticleService
     init {
         val baseUrl = "https://newsapi.org/"
-        val url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=79e9f5affe334dadbf8b3e91d382bcb7/"
+//        val url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=79e9f5affe334dadbf8b3e91d382bcb7/"
         val retrofit = Retrofit.Builder().apply {
             baseUrl(URL(baseUrl))
         }.addConverterFactory(GsonConverterFactory.create())
@@ -20,8 +20,9 @@ class Articlepository {
         service = retrofit.create(ArticleService::class.java)
     }
 
-    fun list(): List<Article>? {
-        val response = service.list().execute()
+    fun list(categorie: String): List<Article>? {
+        val response = service.list(categorie).execute()
+//        println(response)
 //        println(response.body()?.articles)
         return response.body()?.articles
 
