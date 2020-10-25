@@ -1,32 +1,19 @@
 package com.mbds.article.adapters
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mbds.article.R
 import com.mbds.article.model.Article
-import java.time.LocalDate
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 
 class ArticleAdapter(private val dataset: List<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
-
-
-
     class ViewHolder(val root: View) : RecyclerView.ViewHolder(root) {
         fun bind(item: Article) {
-
-//            root.setOnClickListener{
-//                println(item.title)
-//
-//            }
             //nameSource
             val txtSource: TextView = root.findViewById(R.id.source)
             val source = item.source.toString()
@@ -36,7 +23,6 @@ class ArticleAdapter(private val dataset: List<Article>) :
             //date
             val date = toDateFormat(item.publishedAt.toString())
 
-            print(item.publishedAt)
 
             val txtPublishedAt: TextView = root.findViewById(R.id.published_at)
 
@@ -54,14 +40,11 @@ class ArticleAdapter(private val dataset: List<Article>) :
                 .into(imageView);
 
         }
-
         private fun toDateFormat(date: String): String{
             //2020-10-21T13:28:15Z
             val dateReturn = date.split("[-T:Z]".toRegex())
             return "Le "+ dateReturn[2] +"-"+ dateReturn[1] +"-" + dateReturn[0] +" à " + dateReturn[3]+"h"+dateReturn[4]
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

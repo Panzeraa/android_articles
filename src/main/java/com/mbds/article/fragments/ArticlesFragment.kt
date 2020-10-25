@@ -49,7 +49,6 @@ class ArticlesFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentArticlesBinding.inflate(inflater, container, false)
         return binding.root
-//        return inflater.inflate(R.layout.fragment_articles, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,8 +74,6 @@ class ArticlesFragment : Fragment() {
     private suspend fun getData() {
         withContext(Dispatchers.IO) {
             val result = repository.list(categorie)
-//            println(result)
-            println(binding.root.children)
             if (result != null) {
                 bindData(result)
             }
@@ -89,9 +86,6 @@ class ArticlesFragment : Fragment() {
             val recyclerView: RecyclerView = myView.findViewById(R.id.recycler_view)
             val adapterRecycler = ArticleAdapter(result)
             recyclerView.adapter = adapterRecycler
-            for (i in 0..recyclerView.getAdapter()?.getItemCount()!!) {
-                println(recyclerView.getAdapter()!!.getItemId(i))
-            }
         }
     }
 
