@@ -72,8 +72,41 @@ class ArticlesFragment : Fragment() {
 
     //S'execute dans un thread secondaire
     private suspend fun getData() {
+        var result: List<Article>
         withContext(Dispatchers.IO) {
-            val result = repository.list(categorie)
+            try {
+                result = repository.list(categorie)!!
+            } catch (e: Exception) {
+                result = listOf<Article>()
+                when (e.toString().toInt()) {
+                    400 -> Toast.makeText(
+                        context,
+                        "Bad Request. The request was unacceptable, often due to a missing or misconfigured parameter.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    401 -> Toast.makeText(
+                        context,
+                        "Unauthorized. Your API key was missing from the request, or wasn't correct.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    429 -> Toast.makeText(
+                        context,
+                        "Too Many Requests. You made too many requests within a window of time and have been rate limited. Back off for a while.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    500 -> Toast.makeText(
+                        context,
+                        "Server Error. Something went wrong on our side.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else -> Toast.makeText(
+                        context,
+                        "OK. The request was executed successfully.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
             if (result != null) {
                 bindData(result)
             }
