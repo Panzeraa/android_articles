@@ -53,7 +53,7 @@ class ArticlesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as? MainActivity)?.setTitle("Actualités : " + categorie.get(0).toUpperCase() + categorie.substring(1,categorie.length))
         myView = view
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         val articles = mutableListOf<Article>()
@@ -65,6 +65,7 @@ class ArticlesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         lifecycleScope.launch {
             getData()
         }
@@ -84,7 +85,7 @@ class ArticlesFragment : Fragment() {
             } catch (e: Exception) {
                 result = listOf<Article>()
                 println(e.message)
-                (activity as? MainActivity)?.changeFragment(ChoiceFragment.newInstance())
+                (activity as? MainActivity)?.changeFragment(CategoriesFragment.newInstance())
                 activity?.runOnUiThread{
                     println(e.message)
                     when (e.message.toString().toInt()) {
@@ -122,10 +123,7 @@ class ArticlesFragment : Fragment() {
                 }
 
             }
-
-            if (result != null) {
-                bindData(result)
-            }
+            bindData(result)
         }
     }
 
