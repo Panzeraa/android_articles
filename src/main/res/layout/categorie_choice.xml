@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="10dp"
-        android:tag="&amp;"
+        android:tag="error"
         android:text="Erreur"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

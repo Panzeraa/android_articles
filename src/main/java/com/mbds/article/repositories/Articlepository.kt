@@ -1,14 +1,9 @@
 package com.mbds.article.repositories
 
-import android.content.Context
-import android.view.View
-import android.widget.Toast
 import com.mbds.article.model.Article
-import com.mbds.article.model.ArticleInfo
 import com.mbds.article.services.ArticleService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Url
 import java.net.URL
 
 class Articlepository {
@@ -29,11 +24,15 @@ class Articlepository {
         if(response.code() != 200){
             throw Exception(response.code().toString())
         }
-
-
         return response.body()?.articles
-
     }
 
-
+    fun listError(categorie: String): List<Article>? {
+        val response = service.listError(categorie).execute()
+        println(response.code())
+        if(response.code() != 200){
+            throw Exception(response.code().toString())
+        }
+        return response.body()?.articles
+    }
 }
